@@ -1,8 +1,7 @@
 import 'dart:convert';
 
 import 'package:ditonton/data/models/genre_model.dart';
-import 'package:ditonton/domain/entities/genre.dart';
-import 'package:ditonton/domain/entities/tv_series/tv_detail.dart';
+import 'package:ditonton/domain/entities/tv_series/tv_series_detail.dart';
 import 'package:equatable/equatable.dart';
 
 TvSeriesDetailResponse tvSeriesDetailResponseFromJson(String str) =>
@@ -164,8 +163,8 @@ class TvSeriesDetailResponse extends Equatable {
         "vote_count": voteCount,
       };
 
-  TVDetail toEntity() {
-    return TVDetail(
+  TVSeriesDetail toEntity() {
+    return TVSeriesDetail(
       adult: this.adult,
       backdropPath: this.backdropPath,
       genres: this.genres.map((genre) => genre.toEntity()).toList(),

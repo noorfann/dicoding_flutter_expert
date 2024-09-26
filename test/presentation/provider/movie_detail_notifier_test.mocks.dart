@@ -13,11 +13,10 @@ import 'package:ditonton/domain/repositories/movie_repository.dart' as _i2;
 import 'package:ditonton/domain/usecases/movies/get_movie_detail.dart' as _i4;
 import 'package:ditonton/domain/usecases/movies/get_movie_recommendations.dart'
     as _i8;
-import 'package:ditonton/domain/usecases/watchlist/get_watchlist_status.dart'
+import 'package:ditonton/domain/usecases/movies/get_watchlist_status.dart'
     as _i10;
-import 'package:ditonton/domain/usecases/watchlist/remove_watchlist.dart'
-    as _i12;
-import 'package:ditonton/domain/usecases/watchlist/save_watchlist.dart' as _i11;
+import 'package:ditonton/domain/usecases/movies/remove_watchlist.dart' as _i12;
+import 'package:ditonton/domain/usecases/movies/save_watchlist.dart' as _i11;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint

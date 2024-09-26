@@ -1,7 +1,14 @@
 import 'dart:async';
-
-import 'package:ditonton/data/models/watchlist_table.dart';
 import 'package:sqflite/sqflite.dart';
+
+enum WatchCategory {
+  tvSeries('TVSERIES'),
+  movie('MOVIE');
+
+  final String code;
+
+  const WatchCategory(this.code);
+}
 
 class DatabaseHelper {
   static DatabaseHelper? _databaseHelper;
@@ -37,31 +44,33 @@ class DatabaseHelper {
         title TEXT,
         overview TEXT,
         posterPath TEXT,
-        category TEXT CHECK( category IN ('${WatchCategory.movie.name}', '${WatchCategory.tvSeries.name}') ) NOT NULL DEFAULT 'MOVIE',
+        category TEXT CHECK(category IN ('${WatchCategory.movie.code}','${WatchCategory.tvSeries.code}')) NOT NULL DEFAULT '${WatchCategory.movie.code}'
       );
     ''');
   }
 
-  Future<int> insertWatchlist(WatchlistTable movie) async {
+  Future<int> insertWatchlist(Map<String, dynamic> watchlist) async {
     final db = await database;
-    return await db!.insert(_tblWatchlist, movie.toJson());
+    return await db!.insert(_tblWatchlist, watchlist);
   }
 
-  Future<int> removeWatchlist(WatchlistTable movie) async {
+  Future<int> removeWatchlist(
+      {required int id, required WatchCategory category}) async {
     final db = await database;
     return await db!.delete(
       _tblWatchlist,
-      where: 'id = ?',
-      whereArgs: [movie.id],
+      where: 'id = ? AND category = ?',
+      whereArgs: [id, category.code],
     );
   }
 
-  Future<Map<String, dynamic>?> getMovieById(int id) async {
+  Future<Map<String, dynamic>?> getWatchlistById(
+      {required int id, required WatchCategory category}) async {
     final db = await database;
     final results = await db!.query(
       _tblWatchlist,
-      where: 'id = ?',
-      whereArgs: [id],
+      where: 'id = ? AND category = ?',
+      whereArgs: [id, category.code],
     );
 
     if (results.isNotEmpty) {
@@ -71,9 +80,11 @@ class DatabaseHelper {
     }
   }
 
-  Future<List<Map<String, dynamic>>> getWatchlist() async {
+  Future<List<Map<String, dynamic>>> getWatchlist(
+      WatchCategory category) async {
     final db = await database;
-    final List<Map<String, dynamic>> results = await db!.query(_tblWatchlist);
+    final List<Map<String, dynamic>> results = await db!.query(_tblWatchlist,
+        where: 'category = ?', whereArgs: [category.code]);
 
     return results;
   }

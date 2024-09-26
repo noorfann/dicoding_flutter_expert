@@ -2,52 +2,33 @@ import 'package:ditonton/domain/entities/movie/movie.dart';
 import 'package:ditonton/domain/entities/movie/movie_detail.dart';
 import 'package:equatable/equatable.dart';
 
-enum WatchCategory {
-  tvSeries('TVSERIES'),
-  movie('MOVIE');
+import '../../datasources/db/database_helper.dart';
 
-  final String name;
-  const WatchCategory(this.name);
-}
-
-class WatchlistTable extends Equatable {
+class MovieTable extends Equatable {
   final int id;
   final String? title;
   final String? posterPath;
   final String? overview;
-  final WatchCategory category;
 
-  WatchlistTable({
+  MovieTable({
     required this.id,
     required this.title,
     required this.posterPath,
     required this.overview,
-    required this.category,
   });
 
-  factory WatchlistTable.fromMovieEntity(MovieDetail movie) => WatchlistTable(
+  factory MovieTable.fromEntity(MovieDetail movie) => MovieTable(
         id: movie.id,
         title: movie.title,
         posterPath: movie.posterPath,
         overview: movie.overview,
-        category: WatchCategory.movie,
       );
 
-  factory WatchlistTable.fromTVSeriesEntity(MovieDetail movie) =>
-      WatchlistTable(
-        id: movie.id,
-        title: movie.title,
-        posterPath: movie.posterPath,
-        overview: movie.overview,
-        category: WatchCategory.tvSeries,
-      );
-
-  factory WatchlistTable.fromMap(Map<String, dynamic> map) => WatchlistTable(
+  factory MovieTable.fromMap(Map<String, dynamic> map) => MovieTable(
         id: map['id'],
         title: map['title'],
         posterPath: map['posterPath'],
         overview: map['overview'],
-        category: WatchCategory.movie,
       );
 
   Map<String, dynamic> toJson() => {
@@ -55,7 +36,7 @@ class WatchlistTable extends Equatable {
         'title': title,
         'posterPath': posterPath,
         'overview': overview,
-        'category': category.name
+        'category': WatchCategory.movie.code
       };
 
   Movie toEntity() => Movie.watchlist(
