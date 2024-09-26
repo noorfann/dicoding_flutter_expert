@@ -12,10 +12,12 @@ import 'package:ditonton/domain/entities/movie/movie_detail.dart' as _i7;
 import 'package:ditonton/domain/usecases/movies/get_movie_detail.dart' as _i2;
 import 'package:ditonton/domain/usecases/movies/get_movie_recommendations.dart'
     as _i3;
-import 'package:ditonton/domain/usecases/movies/get_watchlist_status.dart'
+import 'package:ditonton/domain/usecases/watchlist/get_watchlist_status.dart'
     as _i4;
-import 'package:ditonton/domain/usecases/movies/remove_watchlist.dart' as _i6;
-import 'package:ditonton/domain/usecases/movies/save_watchlist.dart' as _i5;
+import 'package:ditonton/domain/usecases/watchlist/remove_watchlist.dart'
+    as _i6;
+import 'package:ditonton/domain/usecases/watchlist/save_watchlist_movie.dart'
+    as _i5;
 import 'package:ditonton/presentation/provider/movie_detail_notifier.dart'
     as _i8;
 import 'package:mockito/mockito.dart' as _i1;
@@ -67,8 +69,9 @@ class _FakeGetWatchListStatus_2 extends _i1.SmartFake
         );
 }
 
-class _FakeSaveWatchlist_3 extends _i1.SmartFake implements _i5.SaveWatchlist {
-  _FakeSaveWatchlist_3(
+class _FakeSaveWatchlistMovie_3 extends _i1.SmartFake
+    implements _i5.SaveWatchlistMovie {
+  _FakeSaveWatchlistMovie_3(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -136,13 +139,13 @@ class MockMovieDetailNotifier extends _i1.Mock
       ) as _i4.GetWatchListStatus);
 
   @override
-  _i5.SaveWatchlist get saveWatchlist => (super.noSuchMethod(
+  _i5.SaveWatchlistMovie get saveWatchlist => (super.noSuchMethod(
         Invocation.getter(#saveWatchlist),
-        returnValue: _FakeSaveWatchlist_3(
+        returnValue: _FakeSaveWatchlistMovie_3(
           this,
           Invocation.getter(#saveWatchlist),
         ),
-      ) as _i5.SaveWatchlist);
+      ) as _i5.SaveWatchlistMovie);
 
   @override
   _i6.RemoveWatchlist get removeWatchlist => (super.noSuchMethod(

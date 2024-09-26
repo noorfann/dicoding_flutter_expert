@@ -17,14 +17,11 @@ import '../../helpers/test_helper.mocks.dart';
 void main() {
   late TVSeriesRepositoryImpl repository;
   late MockTVSeriesRemoteDataSource mockRemoteDataSource;
-  late MockTVSeriesLocalDataSource mockLocalDataSource;
 
   setUp(() {
     mockRemoteDataSource = MockTVSeriesRemoteDataSource();
-    mockLocalDataSource = MockTVSeriesLocalDataSource();
     repository = TVSeriesRepositoryImpl(
       remoteDataSource: mockRemoteDataSource,
-      localDataSource: mockLocalDataSource,
     );
   });
 
@@ -217,7 +214,7 @@ void main() {
       numberOfSeasons: 1,
       originCountry: ['en'],
       nextEpisodeToAir: 'nextEpisodeToAir',
-      originalName: 'originalName',
+      originalName: 'title',
       seasons: [],
       type: 'type',
       productionCompanies: [],
@@ -372,76 +369,6 @@ void main() {
       // assert
       expect(
           result, Left(ConnectionFailure('Failed to connect to the network')));
-    });
-  });
-
-  group('save watchlist', () {
-    test('should return success message when saving successful', () async {
-      // arrange
-      when(mockLocalDataSource.insertWatchlist(testTVSeriesTable))
-          .thenAnswer((_) async => 'Added to Watchlist');
-      // act
-      final result = await repository.saveWatchlist(testTVSeriesDetail);
-      // assert
-      expect(result, Right('Added to Watchlist'));
-    });
-
-    test('should return DatabaseFailure when saving unsuccessful', () async {
-      // arrange
-      when(mockLocalDataSource.insertWatchlist(testTVSeriesTable))
-          .thenThrow(DatabaseException('Failed to add watchlist'));
-      // act
-      final result = await repository.saveWatchlist(testTVSeriesDetail);
-      // assert
-      expect(result, Left(DatabaseFailure('Failed to add watchlist')));
-    });
-  });
-
-  group('remove watchlist', () {
-    test('should return success message when remove successful', () async {
-      // arrange
-      when(mockLocalDataSource.removeWatchlist(testTVSeriesTable))
-          .thenAnswer((_) async => 'Removed from watchlist');
-      // act
-      final result = await repository.removeWatchlist(testTVSeriesDetail);
-      // assert
-      expect(result, Right('Removed from watchlist'));
-    });
-
-    test('should return DatabaseFailure when remove unsuccessful', () async {
-      // arrange
-      when(mockLocalDataSource.removeWatchlist(testTVSeriesTable))
-          .thenThrow(DatabaseException('Failed to remove watchlist'));
-      // act
-      final result = await repository.removeWatchlist(testTVSeriesDetail);
-      // assert
-      expect(result, Left(DatabaseFailure('Failed to remove watchlist')));
-    });
-  });
-
-  group('get watchlist status', () {
-    test('should return watch status whether data is found', () async {
-      // arrange
-      final tId = 1;
-      when(mockLocalDataSource.getTVSeriesById(tId))
-          .thenAnswer((_) async => null);
-      // act
-      final result = await repository.isAddedToWatchlist(tId);
-      // assert
-      expect(result, false);
-    });
-  });
-
-  group('get watchlist TVSeries', () {
-    test('should return list of TVSeries', () async {
-      // arrange
-      when(mockLocalDataSource.getWatchlistTVSeries())
-          .thenAnswer((_) async => [testTVSeriesTable]);
-      // act
-      final result = await repository.getWatchlistTVSeries();
-      // assert
-      final resultList = result.getOrElse(() => []);
-      expect(resultList, [testWatchlistTVSeries]);
     });
   });
 }

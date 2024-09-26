@@ -1,5 +1,4 @@
-import 'package:ditonton/data/models/movie/movie_table.dart';
-import 'package:ditonton/data/models/tv_series/tv_series_table.dart';
+import 'package:ditonton/data/models/watchlist_table.dart';
 import 'package:ditonton/domain/entities/genre.dart';
 import 'package:ditonton/domain/entities/movie/movie.dart';
 import 'package:ditonton/domain/entities/movie/movie_detail.dart';
@@ -47,13 +46,6 @@ final testWatchlistMovie = Movie.watchlist(
   overview: 'overview',
 );
 
-final testMovieTable = MovieTable(
-  id: 1,
-  title: 'title',
-  posterPath: 'posterPath',
-  overview: 'overview',
-);
-
 final testMovieMap = {
   'id': 1,
   'overview': 'overview',
@@ -65,13 +57,6 @@ final testMovieMap = {
 final testWatchlistTVSeries = TVSeries.watchlist(
   id: 1,
   originalName: 'title',
-  posterPath: 'posterPath',
-  overview: 'overview',
-);
-
-final testTVSeriesTable = TVSeriesTable(
-  id: 1,
-  title: 'title',
   posterPath: 'posterPath',
   overview: 'overview',
 );
@@ -93,4 +78,32 @@ final testTVSeriesDetail = TVSeriesDetail(
   voteAverage: 1,
   voteCount: 1,
   originalName: 'title',
+);
+
+final testTVSeries = TVSeries(
+  adult: false,
+  backdropPath: '/muth4OYamXf41G2evdrLEg8d3om.jpg',
+  genreIds: [14, 28],
+  id: 557,
+  originalName: 'Spider-Man',
+  overview:
+      'After being bitten by a genetically altered spider, nerdy high school student Peter Parker is endowed with amazing powers to become the Amazing superhero known as Spider-Man.',
+  popularity: 60.441,
+  posterPath: '/rweIrveL43TaxUN0akQEaAXL6x0.jpg',
+  firstAirDate: '2002-05-01',
+  name: 'Spider-Man',
+  voteAverage: 7.2,
+  voteCount: 13507,
+  originalLanguage: 'en',
+  originCountry: ['US'],
+);
+
+final testTVSeriesList = [testTVSeries];
+
+// watchlist
+final testWatchlistTable = WatchlistTable(
+  id: 1,
+  title: 'title',
+  posterPath: 'posterPath',
+  overview: 'overview',
 );
