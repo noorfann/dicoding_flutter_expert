@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:ditonton/data/datasources/db/database_helper.dart';
+import 'package:ditonton/common/watch_category_enum.dart';
 import 'package:ditonton/domain/usecases/watchlist/remove_watchlist.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';

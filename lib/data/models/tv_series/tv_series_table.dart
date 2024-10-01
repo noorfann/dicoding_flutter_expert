@@ -1,4 +1,4 @@
-import 'package:ditonton/data/datasources/db/database_helper.dart';
+import 'package:ditonton/common/watch_category_enum.dart';
 import 'package:ditonton/domain/entities/tv_series/tv_series.dart';
 import 'package:ditonton/domain/entities/tv_series/tv_series_detail.dart';
 import 'package:equatable/equatable.dart';

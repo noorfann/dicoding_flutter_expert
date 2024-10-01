@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:ditonton/data/datasources/db/database_helper.dart';
+import 'package:ditonton/common/watch_category_enum.dart';
 import 'package:ditonton/common/exception.dart';
 import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/data/datasources/watchlist_local_data_source.dart';
@@ -20,8 +20,8 @@ class WatchlistRepositoryImpl implements WatchlistRepository {
   @override
   Future<Either<Failure, String>> saveWatchlistMovie(MovieDetail movie) async {
     try {
-      final result = await localDataSource
-          .insertWatchlist(WatchlistTable.fromMovieEntity(movie));
+      final result = await localDataSource.insertWatchlist(
+          WatchlistTable.fromMovieEntity(movie), WatchCategory.movie);
       return Right(result);
     } on DatabaseException catch (e) {
       return Left(DatabaseFailure(e.message));
@@ -34,8 +34,8 @@ class WatchlistRepositoryImpl implements WatchlistRepository {
   Future<Either<Failure, String>> saveWatchlistTVSeries(
       TVSeriesDetail tvSeries) async {
     try {
-      final result = await localDataSource
-          .insertWatchlist(WatchlistTable.fromTVSeriesEntity(tvSeries));
+      final result = await localDataSource.insertWatchlist(
+          WatchlistTable.fromTVSeriesEntity(tvSeries), WatchCategory.tvSeries);
       return Right(result);
     } on DatabaseException catch (e) {
       return Left(DatabaseFailure(e.message));

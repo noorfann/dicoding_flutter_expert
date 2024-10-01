@@ -1,5 +1,5 @@
 import 'package:ditonton/common/exception.dart';
-import 'package:ditonton/data/datasources/db/database_helper.dart';
+import 'package:ditonton/common/watch_category_enum.dart';
 import 'package:ditonton/data/datasources/watchlist_local_data_source.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -21,10 +21,11 @@ void main() {
     test('should return success message when insert to database is success',
         () async {
       // arrange
-      when(mockDatabaseHelper.insertWatchlist(testWatchlistTable.toJson()))
+      when(mockDatabaseHelper.insertWatchlist(testWatchlistTable.toJsonMovie()))
           .thenAnswer((_) async => 1);
       // act
-      final result = await dataSource.insertWatchlist(testWatchlistTable);
+      final result = await dataSource.insertWatchlist(
+          testWatchlistTable, WatchCategory.movie);
       // assert
       expect(result, 'Added to Watchlist');
     });
@@ -32,10 +33,11 @@ void main() {
     test('should throw DatabaseException when insert to database is failed',
         () async {
       // arrange
-      when(mockDatabaseHelper.insertWatchlist(testWatchlistTable.toJson()))
+      when(mockDatabaseHelper.insertWatchlist(testWatchlistTable.toJsonMovie()))
           .thenThrow(Exception());
       // act
-      final call = dataSource.insertWatchlist(testWatchlistTable);
+      final call =
+          dataSource.insertWatchlist(testWatchlistTable, WatchCategory.movie);
       // assert
       expect(() => call, throwsA(isA<DatabaseException>()));
     });

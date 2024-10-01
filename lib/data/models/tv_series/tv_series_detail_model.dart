@@ -4,6 +4,8 @@ import 'package:ditonton/data/models/genre_model.dart';
 import 'package:ditonton/domain/entities/tv_series/tv_series_detail.dart';
 import 'package:equatable/equatable.dart';
 
+import 'season_model.dart';
+
 TvSeriesDetailResponse tvSeriesDetailResponseFromJson(String str) =>
     TvSeriesDetailResponse.fromJson(json.decode(str));
 
@@ -15,13 +17,13 @@ class TvSeriesDetailResponse extends Equatable {
   final String backdropPath;
   final List<dynamic> createdBy;
   final List<int> episodeRunTime;
-  final DateTime firstAirDate;
+  final String firstAirDate;
   final List<GenreModel> genres;
   final String homepage;
   final int id;
   final bool inProduction;
   final List<String> languages;
-  final DateTime lastAirDate;
+  final String lastAirDate;
   final LastEpisodeToAir lastEpisodeToAir;
   final String name;
   final dynamic nextEpisodeToAir;
@@ -36,7 +38,7 @@ class TvSeriesDetailResponse extends Equatable {
   final String posterPath;
   final List<dynamic> productionCompanies;
   final List<ProductionCountry> productionCountries;
-  final List<Season> seasons;
+  final List<SeasonModel> seasons;
   final List<SpokenLanguage> spokenLanguages;
   final String status;
   final String tagline;
@@ -85,14 +87,14 @@ class TvSeriesDetailResponse extends Equatable {
         backdropPath: json["backdrop_path"],
         createdBy: List<dynamic>.from(json["created_by"].map((x) => x)),
         episodeRunTime: List<int>.from(json["episode_run_time"].map((x) => x)),
-        firstAirDate: DateTime.parse(json["first_air_date"]),
+        firstAirDate: json["first_air_date"],
         genres: List<GenreModel>.from(
             json["genres"].map((x) => GenreModel.fromJson(x))),
         homepage: json["homepage"],
         id: json["id"],
         inProduction: json["in_production"],
         languages: List<String>.from(json["languages"].map((x) => x)),
-        lastAirDate: DateTime.parse(json["last_air_date"]),
+        lastAirDate: json["last_air_date"],
         lastEpisodeToAir:
             LastEpisodeToAir.fromJson(json["last_episode_to_air"]),
         name: json["name"],
@@ -112,8 +114,8 @@ class TvSeriesDetailResponse extends Equatable {
         productionCountries: List<ProductionCountry>.from(
             json["production_countries"]
                 .map((x) => ProductionCountry.fromJson(x))),
-        seasons:
-            List<Season>.from(json["seasons"].map((x) => Season.fromJson(x))),
+        seasons: List<SeasonModel>.from(
+            json["seasons"].map((x) => SeasonModel.fromJson(x))),
         spokenLanguages: List<SpokenLanguage>.from(
             json["spoken_languages"].map((x) => SpokenLanguage.fromJson(x))),
         status: json["status"],
@@ -128,15 +130,13 @@ class TvSeriesDetailResponse extends Equatable {
         "backdrop_path": backdropPath,
         "created_by": List<dynamic>.from(createdBy.map((x) => x)),
         "episode_run_time": List<dynamic>.from(episodeRunTime.map((x) => x)),
-        "first_air_date":
-            "${firstAirDate.year.toString().padLeft(4, '0')}-${firstAirDate.month.toString().padLeft(2, '0')}-${firstAirDate.day.toString().padLeft(2, '0')}",
+        "first_air_date": firstAirDate,
         "genres": List<dynamic>.from(genres.map((x) => x.toJson())),
         "homepage": homepage,
         "id": id,
         "in_production": inProduction,
         "languages": List<dynamic>.from(languages.map((x) => x)),
-        "last_air_date":
-            "${lastAirDate.year.toString().padLeft(4, '0')}-${lastAirDate.month.toString().padLeft(2, '0')}-${lastAirDate.day.toString().padLeft(2, '0')}",
+        "last_air_date": lastAirDate,
         "last_episode_to_air": lastEpisodeToAir.toJson(),
         "name": name,
         "next_episode_to_air": nextEpisodeToAir,
@@ -165,6 +165,8 @@ class TvSeriesDetailResponse extends Equatable {
 
   TVSeriesDetail toEntity() {
     return TVSeriesDetail(
+      name: this.name,
+      episodeRunTime: episodeRunTime,
       adult: this.adult,
       backdropPath: this.backdropPath,
       genres: this.genres.map((genre) => genre.toEntity()).toList(),
@@ -174,6 +176,7 @@ class TvSeriesDetailResponse extends Equatable {
       posterPath: this.posterPath,
       voteAverage: this.voteAverage,
       voteCount: this.voteCount,
+      seasons: this.seasons.map((season) => season.toEntity()).toList(),
     );
   }
 
@@ -219,7 +222,7 @@ class LastEpisodeToAir {
   final int episodeNumber;
   final String episodeType;
   final String productionCode;
-  final int runtime;
+  final int? runtime;
   final int seasonNumber;
   final int showId;
   final dynamic stillPath;
@@ -321,51 +324,6 @@ class ProductionCountry {
   Map<String, dynamic> toJson() => {
         "iso_3166_1": iso31661,
         "name": name,
-      };
-}
-
-class Season {
-  final DateTime airDate;
-  final int episodeCount;
-  final int id;
-  final String name;
-  final String overview;
-  final String posterPath;
-  final int seasonNumber;
-  final double voteAverage;
-
-  Season({
-    required this.airDate,
-    required this.episodeCount,
-    required this.id,
-    required this.name,
-    required this.overview,
-    required this.posterPath,
-    required this.seasonNumber,
-    required this.voteAverage,
-  });
-
-  factory Season.fromJson(Map<String, dynamic> json) => Season(
-        airDate: DateTime.parse(json["air_date"]),
-        episodeCount: json["episode_count"],
-        id: json["id"],
-        name: json["name"],
-        overview: json["overview"],
-        posterPath: json["poster_path"],
-        seasonNumber: json["season_number"],
-        voteAverage: json["vote_average"]?.toDouble(),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "air_date":
-            "${airDate.year.toString().padLeft(4, '0')}-${airDate.month.toString().padLeft(2, '0')}-${airDate.day.toString().padLeft(2, '0')}",
-        "episode_count": episodeCount,
-        "id": id,
-        "name": name,
-        "overview": overview,
-        "poster_path": posterPath,
-        "season_number": seasonNumber,
-        "vote_average": voteAverage,
       };
 }
 

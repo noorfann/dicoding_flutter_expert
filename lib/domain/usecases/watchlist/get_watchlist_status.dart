@@ -1,4 +1,4 @@
-import 'package:ditonton/data/datasources/db/database_helper.dart';
+import 'package:ditonton/common/watch_category_enum.dart';
 import 'package:ditonton/domain/repositories/watchlist_repository.dart';
 
 class GetWatchListStatus {

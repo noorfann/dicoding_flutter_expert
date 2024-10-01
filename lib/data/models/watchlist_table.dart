@@ -1,4 +1,4 @@
-import 'package:ditonton/data/datasources/db/database_helper.dart';
+import 'package:ditonton/common/watch_category_enum.dart';
 import 'package:ditonton/domain/entities/movie/movie.dart';
 import 'package:ditonton/domain/entities/movie/movie_detail.dart';
 import 'package:ditonton/domain/entities/tv_series/tv_series.dart';
@@ -40,7 +40,15 @@ class WatchlistTable extends Equatable {
         overview: map['overview'],
       );
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJsonMovie() => {
+        'id': id,
+        'title': title,
+        'posterPath': posterPath,
+        'overview': overview,
+        'category': WatchCategory.movie.code
+      };
+
+  Map<String, dynamic> toJsonTVSeries() => {
         'id': id,
         'title': title,
         'posterPath': posterPath,

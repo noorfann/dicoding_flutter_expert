@@ -1,14 +1,6 @@
 import 'dart:async';
+import 'package:ditonton/common/watch_category_enum.dart';
 import 'package:sqflite/sqflite.dart';
-
-enum WatchCategory {
-  tvSeries('TVSERIES'),
-  movie('MOVIE');
-
-  final String code;
-
-  const WatchCategory(this.code);
-}
 
 class DatabaseHelper {
   static DatabaseHelper? _databaseHelper;

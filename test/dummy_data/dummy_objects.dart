@@ -2,6 +2,7 @@ import 'package:ditonton/data/models/watchlist_table.dart';
 import 'package:ditonton/domain/entities/genre.dart';
 import 'package:ditonton/domain/entities/movie/movie.dart';
 import 'package:ditonton/domain/entities/movie/movie_detail.dart';
+import 'package:ditonton/domain/entities/tv_series/season.dart';
 import 'package:ditonton/domain/entities/tv_series/tv_series.dart';
 import 'package:ditonton/domain/entities/tv_series/tv_series_detail.dart';
 
@@ -69,16 +70,28 @@ final testTVSeriesMap = {
 };
 
 final testTVSeriesDetail = TVSeriesDetail(
-  adult: false,
-  backdropPath: 'backdropPath',
-  genres: [Genre(id: 1, name: 'Action')],
-  id: 1,
-  overview: 'overview',
-  posterPath: 'posterPath',
-  voteAverage: 1,
-  voteCount: 1,
-  originalName: 'title',
-);
+    adult: false,
+    backdropPath: 'backdropPath',
+    genres: [Genre(id: 1, name: 'Action')],
+    id: 1,
+    overview: 'overview',
+    posterPath: 'posterPath',
+    voteAverage: 1,
+    voteCount: 1,
+    originalName: 'title',
+    name: 'title',
+    episodeRunTime: [60],
+    seasons: [
+      Season(
+        id: 1,
+        name: 'name',
+        posterPath: 'posterPath',
+        seasonNumber: 1,
+        airDate: 'airDate',
+        episodeCount: 1,
+        voteAverage: 1,
+      )
+    ]);
 
 final testTVSeries = TVSeries(
   adult: false,

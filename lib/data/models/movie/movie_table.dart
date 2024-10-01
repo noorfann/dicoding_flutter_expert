@@ -1,8 +1,7 @@
+import 'package:ditonton/common/watch_category_enum.dart';
 import 'package:ditonton/domain/entities/movie/movie.dart';
 import 'package:ditonton/domain/entities/movie/movie_detail.dart';
 import 'package:equatable/equatable.dart';
-
-import '../../datasources/db/database_helper.dart';
 
 class MovieTable extends Equatable {
   final int id;

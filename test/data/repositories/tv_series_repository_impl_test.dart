@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ditonton/data/models/genre_model.dart';
 import 'package:ditonton/common/exception.dart';
 import 'package:ditonton/common/failure.dart';
+import 'package:ditonton/data/models/tv_series/season_model.dart';
 import 'package:ditonton/data/models/tv_series/tv_series_detail_model.dart';
 import 'package:ditonton/data/models/tv_series/tv_series_model.dart';
 import 'package:ditonton/data/repositories/tv_series_repository_impl.dart';
@@ -194,13 +195,24 @@ void main() {
       backdropPath: 'backdropPath',
       createdBy: [],
       genres: [GenreModel(id: 1, name: 'Action')],
+      seasons: [
+        SeasonModel(
+            airDate: 'airDate',
+            episodeCount: 1,
+            id: 1,
+            name: 'name',
+            overview: 'overview',
+            posterPath: 'posterPath',
+            seasonNumber: 1,
+            voteAverage: 1)
+      ],
       homepage: "https://google.com",
       id: 1,
       originalLanguage: 'en',
       overview: 'overview',
       popularity: 1,
       posterPath: 'posterPath',
-      firstAirDate: DateTime.now(),
+      firstAirDate: 'firstAirDate',
       status: 'Status',
       tagline: 'Tagline',
       voteAverage: 1,
@@ -208,14 +220,13 @@ void main() {
       episodeRunTime: [100],
       inProduction: false,
       languages: ['en'],
-      lastAirDate: DateTime.now(),
+      lastAirDate: 'lastAirDate',
       name: 'name',
       numberOfEpisodes: 1,
       numberOfSeasons: 1,
       originCountry: ['en'],
       nextEpisodeToAir: 'nextEpisodeToAir',
       originalName: 'title',
-      seasons: [],
       type: 'type',
       productionCompanies: [],
       productionCountries: [],

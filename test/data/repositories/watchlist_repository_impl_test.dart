@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:ditonton/common/exception.dart';
 import 'package:ditonton/common/failure.dart';
-import 'package:ditonton/data/datasources/db/database_helper.dart';
+import 'package:ditonton/common/watch_category_enum.dart';
 import 'package:ditonton/data/repositories/watchlist_repository_impl.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -24,7 +24,8 @@ void main() {
     test('should return success message when saving watchlistMovie successful',
         () async {
       // arrange
-      when(mockLocalDataSource.insertWatchlist(testWatchlistTable))
+      when(mockLocalDataSource.insertWatchlist(
+              testWatchlistTable, WatchCategory.movie))
           .thenAnswer((_) async => 'Added to Watchlist');
       // act
       final result = await repository.saveWatchlistMovie(testMovieDetail);
@@ -36,7 +37,8 @@ void main() {
         'should return success message when saving watchlistTvSeries successful',
         () async {
       // arrange
-      when(mockLocalDataSource.insertWatchlist(testWatchlistTable))
+      when(mockLocalDataSource.insertWatchlist(
+              testWatchlistTable, WatchCategory.tvSeries))
           .thenAnswer((_) async => 'Added to Watchlist');
       // act
       final result = await repository.saveWatchlistTVSeries(testTVSeriesDetail);
@@ -48,7 +50,8 @@ void main() {
         'should return DatabaseFailure when saving watchlistMovie unsuccessful',
         () async {
       // arrange
-      when(mockLocalDataSource.insertWatchlist(testWatchlistTable))
+      when(mockLocalDataSource.insertWatchlist(
+              testWatchlistTable, WatchCategory.movie))
           .thenThrow(DatabaseException('Failed to add watchlist'));
       // act
       final result = await repository.saveWatchlistMovie(testMovieDetail);
@@ -60,7 +63,8 @@ void main() {
         'should return DatabaseFailure when saving watchlistTVseries unsuccessful',
         () async {
       // arrange
-      when(mockLocalDataSource.insertWatchlist(testWatchlistTable))
+      when(mockLocalDataSource.insertWatchlist(
+              testWatchlistTable, WatchCategory.tvSeries))
           .thenThrow(DatabaseException('Failed to add watchlist'));
       // act
       final result = await repository.saveWatchlistTVSeries(testTVSeriesDetail);
