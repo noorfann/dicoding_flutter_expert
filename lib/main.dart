@@ -6,6 +6,7 @@ import 'package:ditonton/presentation/pages/movie/movie_detail_page.dart';
 import 'package:ditonton/presentation/pages/movie/popular_movies_page.dart';
 import 'package:ditonton/presentation/pages/movie/search_movie_page.dart';
 import 'package:ditonton/presentation/pages/movie/top_rated_movies_page.dart';
+import 'package:ditonton/presentation/pages/tv_series/airing_today_tv_series_page.dart';
 import 'package:ditonton/presentation/pages/tv_series/popular_tv_series_page.dart';
 import 'package:ditonton/presentation/pages/tv_series/search_tv_series_page.dart';
 import 'package:ditonton/presentation/pages/tv_series/top_rated_tv_series_page.dart';
@@ -16,6 +17,7 @@ import 'package:ditonton/presentation/provider/movie/movie_list_notifier.dart';
 import 'package:ditonton/presentation/provider/movie/movie_search_notifier.dart';
 import 'package:ditonton/presentation/provider/movie/popular_movies_notifier.dart';
 import 'package:ditonton/presentation/provider/movie/top_rated_movies_notifier.dart';
+import 'package:ditonton/presentation/provider/tv_series/airing_today_tv_series_notifier.dart';
 import 'package:ditonton/presentation/provider/tv_series/popular_tv_series_notifier.dart';
 import 'package:ditonton/presentation/provider/tv_series/top_rated_tv_series_notifier.dart';
 import 'package:ditonton/presentation/provider/tv_series/tv_series_detail_notifier.dart';
@@ -70,6 +72,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => di.locator<PopularTVSeriesNotifier>(),
         ),
+        ChangeNotifierProvider(
+          create: (_) => di.locator<AiringTodayTVSeriesNotifier>(),
+        ),
         // watchlist
         ChangeNotifierProvider(
           create: (_) => di.locator<WatchlistNotifier>(),
@@ -118,6 +123,9 @@ class MyApp extends StatelessWidget {
               );
             case SearchTvSeriesPage.ROUTE_NAME:
               return CupertinoPageRoute(builder: (_) => SearchTvSeriesPage());
+            case AiringTodayTvSeriesPage.ROUTE_NAME:
+              return CupertinoPageRoute(
+                  builder: (_) => AiringTodayTvSeriesPage());
 
             case WatchlistPage.ROUTE_NAME:
               return MaterialPageRoute(builder: (_) => WatchlistPage());

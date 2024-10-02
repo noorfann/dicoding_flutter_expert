@@ -60,13 +60,13 @@ class HomeTvSeriesPage extends StatelessWidget {
                   Navigator.pushNamed(context, TopRatedTvSeriesPage.ROUTE_NAME),
             ),
             Consumer<TVSeriesListNotifier>(builder: (context, data, child) {
-              final state = data.topRatedMoviesState;
+              final state = data.topRatedTVSeriesState;
               if (state == RequestState.Loading) {
                 return Center(
                   child: CircularProgressIndicator(),
                 );
               } else if (state == RequestState.Loaded) {
-                return TVSeriesList(data.topRatedMovies);
+                return TVSeriesList(data.topRatedTVSeries);
               } else {
                 return Text('Failed');
               }
