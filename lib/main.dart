@@ -1,7 +1,7 @@
-import 'package:ditonton/common/constants.dart';
+import 'package:about/about.dart';
+import 'package:core/core.dart';
 import 'package:ditonton/common/utils.dart';
-import 'package:ditonton/presentation/bloc/search_bloc.dart';
-import 'package:ditonton/presentation/pages/about_page.dart';
+import 'package:ditonton/presentation/bloc/movie/movie_search_bloc/movie_search_bloc.dart';
 import 'package:ditonton/presentation/pages/home_page.dart';
 import 'package:ditonton/presentation/pages/movie/movie_detail_page.dart';
 import 'package:ditonton/presentation/pages/movie/popular_movies_page.dart';
@@ -83,7 +83,7 @@ class MyApp extends StatelessWidget {
         ),
 
         BlocProvider(
-          create: (_) => di.locator<SearchBloc>(),
+          create: (_) => di.locator<MovieSearchBloc>(),
         ),
       ],
       child: MaterialApp(

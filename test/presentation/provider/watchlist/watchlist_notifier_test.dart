@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:ditonton/common/failure.dart';
-import 'package:ditonton/common/state_enum.dart';
+import '../../../../core/lib/utils/failure.dart';
+import '../../../../core/lib/utils/state_enum.dart';
 import 'package:ditonton/domain/usecases/watchlist/get_watchlist_movies.dart';
 import 'package:ditonton/domain/usecases/watchlist/get_watchlist_tv_series.dart';
 import 'package:ditonton/presentation/provider/watchlist_notifier.dart';

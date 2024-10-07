@@ -1,6 +1,5 @@
-import 'package:ditonton/common/constants.dart';
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/presentation/bloc/search_bloc.dart';
+import 'package:core/core.dart';
+import 'package:ditonton/presentation/bloc/movie/movie_search_bloc/movie_search_bloc.dart';
 import 'package:ditonton/presentation/provider/movie/movie_search_notifier.dart';
 import 'package:ditonton/presentation/widgets/movie_card_list.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +22,7 @@ class SearchMoviePage extends StatelessWidget {
           children: [
             TextField(
               onChanged: (query) {
-                context.read<SearchBloc>().add(OnQueryChanged(query));
+                context.read<MovieSearchBloc>().add(OnQueryChanged(query));
               },
               decoration: InputDecoration(
                 hintText: 'Search title',
@@ -37,7 +36,7 @@ class SearchMoviePage extends StatelessWidget {
               'Search Result',
               style: kHeading6,
             ),
-            BlocBuilder<SearchBloc, SearchState>(
+            BlocBuilder<MovieSearchBloc, MovieSearchState>(
               builder: (context, state) {
                 if (state is SearchLoading) {
                   return Center(

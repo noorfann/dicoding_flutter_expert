@@ -5,6 +5,10 @@ import 'package:ditonton/data/datasources/watchlist_local_data_source.dart';
 import 'package:ditonton/domain/repositories/movie_repository.dart';
 import 'package:ditonton/domain/repositories/tv_series_repository.dart';
 import 'package:ditonton/domain/repositories/watchlist_repository.dart';
+import 'package:ditonton/domain/usecases/movies/get_now_playing_movies.dart';
+import 'package:ditonton/domain/usecases/movies/get_popular_movies.dart';
+import 'package:ditonton/domain/usecases/movies/get_top_rated_movies.dart';
+import 'package:ditonton/domain/usecases/movies/search_movies.dart';
 import 'package:mockito/annotations.dart';
 import 'package:http/http.dart' as http;
 
@@ -15,7 +19,11 @@ import 'package:http/http.dart' as http;
   TVSeriesRepository,
   TVSeriesRemoteDataSource,
   WatchlistRepository,
-  WatchlistLocalDataSource
+  WatchlistLocalDataSource,
+  GetNowPlayingMovies,
+  GetPopularMovies,
+  GetTopRatedMovies,
+  SearchMovies
 ], customMocks: [
   MockSpec<http.Client>(as: #MockHttpClient)
 ])

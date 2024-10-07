@@ -1,18 +1,13 @@
 import 'package:dartz/dartz.dart';
 import 'package:ditonton/domain/entities/movie/movie.dart';
-import 'package:ditonton/domain/usecases/movies/get_now_playing_movies.dart';
-import 'package:ditonton/common/failure.dart';
-import 'package:ditonton/domain/usecases/movies/get_popular_movies.dart';
-import 'package:ditonton/domain/usecases/movies/get_top_rated_movies.dart';
+import '../../../../core/lib/utils/failure.dart';
 import 'package:ditonton/presentation/provider/movie/movie_list_notifier.dart';
-import 'package:ditonton/common/state_enum.dart';
+import '../../../../core/lib/utils/state_enum.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import 'movie_list_notifier_test.mocks.dart';
+import '../../../helpers/test_helper.mocks.dart';
 
-@GenerateMocks([GetNowPlayingMovies, GetPopularMovies, GetTopRatedMovies])
 void main() {
   late MovieListNotifier provider;
   late MockGetNowPlayingMovies mockGetNowPlayingMovies;

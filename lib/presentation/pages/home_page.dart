@@ -1,5 +1,5 @@
+import 'package:about/about.dart';
 import 'package:ditonton/common/watch_category_enum.dart';
-import 'package:ditonton/presentation/pages/about_page.dart';
 import 'package:ditonton/presentation/pages/movie/home_movie_page.dart';
 import 'package:ditonton/presentation/pages/movie/search_movie_page.dart';
 import 'package:ditonton/presentation/pages/tv_series/home_tv_series_page.dart';

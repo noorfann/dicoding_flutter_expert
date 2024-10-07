@@ -1,7 +1,6 @@
+import 'package:core/core.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ditonton/common/watch_category_enum.dart';
-import 'package:ditonton/common/exception.dart';
-import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/data/datasources/watchlist_local_data_source.dart';
 import 'package:ditonton/data/models/watchlist_table.dart';
 import 'package:ditonton/domain/entities/movie/movie.dart';

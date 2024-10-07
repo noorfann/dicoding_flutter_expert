@@ -4,13 +4,13 @@ import 'package:ditonton/domain/usecases/movies/search_movies.dart';
 import 'package:equatable/equatable.dart';
 import 'package:rxdart/rxdart.dart';
 
-part 'search_event.dart';
-part 'search_state.dart';
+part 'movie_search_event.dart';
+part 'movie_search_state.dart';
 
-class SearchBloc extends Bloc<SearchEvent, SearchState> {
+class MovieSearchBloc extends Bloc<MovieSearchEvent, MovieSearchState> {
   final SearchMovies _searchMovies;
 
-  SearchBloc(this._searchMovies) : super(SearchEmpty()) {
+  MovieSearchBloc(this._searchMovies) : super(SearchEmpty()) {
     on<OnQueryChanged>((event, emit) async {
       final query = event.query;
 

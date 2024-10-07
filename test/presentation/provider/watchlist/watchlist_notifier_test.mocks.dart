@@ -5,8 +5,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i4;
 
+import 'package:core/core.dart' as _i5;
 import 'package:dartz/dartz.dart' as _i2;
-import 'package:ditonton/common/failure.dart' as _i5;
 import 'package:ditonton/domain/entities/movie/movie.dart' as _i6;
 import 'package:ditonton/domain/entities/tv_series/tv_series.dart' as _i8;
 import 'package:ditonton/domain/usecases/watchlist/get_watchlist_movies.dart'

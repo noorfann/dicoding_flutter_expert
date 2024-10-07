@@ -1,27 +1,24 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
-import 'package:ditonton/common/failure.dart';
+import '../../../core/lib/utils/failure.dart';
 import 'package:ditonton/domain/entities/movie/movie.dart';
-import 'package:ditonton/domain/usecases/movies/search_movies.dart';
-import 'package:ditonton/presentation/bloc/search_bloc.dart';
+import 'package:ditonton/presentation/bloc/movie/movie_search_bloc/movie_search_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import '../provider/movies/movie_search_notifier_test.mocks.dart';
 
-@GenerateMocks([SearchMovies])
 void main() {
-  late SearchBloc searchBloc;
+  late MovieSearchBloc moviesearchBloc;
   late MockSearchMovies mockSearchMovies;
 
   setUp(() {
     mockSearchMovies = MockSearchMovies();
-    searchBloc = SearchBloc(mockSearchMovies);
+    moviesearchBloc = MovieSearchBloc(mockSearchMovies);
   });
 
   test('initial state should be empty', () {
-    expect(searchBloc.state, SearchEmpty());
+    expect(moviesearchBloc.state, SearchEmpty());
   });
 
   final tMovieModel = Movie(
@@ -43,12 +40,12 @@ void main() {
   final tMovieList = <Movie>[tMovieModel];
   final tQuery = 'spiderman';
 
-  blocTest<SearchBloc, SearchState>(
+  blocTest<MovieSearchBloc, MovieSearchState>(
     'Should emit [Loading, HasData] when data is gotten successfully',
     build: () {
       when(mockSearchMovies.execute(tQuery))
           .thenAnswer((_) async => Right(tMovieList));
-      return searchBloc;
+      return moviesearchBloc;
     },
     act: (bloc) => bloc.add(OnQueryChanged(tQuery)),
     wait: const Duration(milliseconds: 500),
@@ -61,12 +58,12 @@ void main() {
     },
   );
 
-  blocTest<SearchBloc, SearchState>(
+  blocTest<MovieSearchBloc, MovieSearchState>(
     'Should emit [Loading, Error] when get search is unsuccessful',
     build: () {
       when(mockSearchMovies.execute(tQuery))
           .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
-      return searchBloc;
+      return moviesearchBloc;
     },
     act: (bloc) => bloc.add(OnQueryChanged(tQuery)),
     wait: const Duration(milliseconds: 500),
