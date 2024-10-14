@@ -1,5 +1,8 @@
 import 'package:about/about.dart';
 import 'package:ditonton/common/watch_category_enum.dart';
+import 'package:ditonton/presentation/bloc/movie/now_playing_movies_bloc/now_playing_movies_bloc.dart';
+import 'package:ditonton/presentation/bloc/movie/popular_movies_bloc/popular_movies_bloc.dart';
+import 'package:ditonton/presentation/bloc/movie/top_rated_movies_bloc/top_rated_movies_bloc.dart';
 import 'package:ditonton/presentation/pages/movie/home_movie_page.dart';
 import 'package:ditonton/presentation/pages/movie/search_movie_page.dart';
 import 'package:ditonton/presentation/pages/tv_series/home_tv_series_page.dart';
@@ -21,20 +24,19 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(
-        () => Provider.of<MovieListNotifier>(context, listen: false)
-          ..fetchNowPlayingMovies()
-          ..fetchPopularMovies()
-          ..fetchTopRatedMovies());
+    Future.microtask(() {
+      context.read<NowPlayingMoviesBloc>().add(OnGetNowPlayingMovies());
+      context.read<PopularMoviesBloc>().add(OnGetPopularMovies());
+      context.read<TopRatedMoviesBloc>().add(OnGetTopRatedMovies());
+    });
   }
 
   _fetchData() {
     switch (_watchCategory) {
       case WatchCategory.movie:
-        Provider.of<MovieListNotifier>(context, listen: false)
-          ..fetchNowPlayingMovies()
-          ..fetchPopularMovies()
-          ..fetchTopRatedMovies();
+        context.read<NowPlayingMoviesBloc>().add(OnGetNowPlayingMovies());
+        context.read<PopularMoviesBloc>().add(OnGetPopularMovies());
+        context.read<TopRatedMoviesBloc>().add(OnGetTopRatedMovies());
         break;
       case WatchCategory.tvSeries:
         Provider.of<TVSeriesListNotifier>(context, listen: false)

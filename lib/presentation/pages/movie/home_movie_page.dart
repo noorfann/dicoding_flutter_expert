@@ -1,13 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/core.dart';
 import 'package:ditonton/domain/entities/movie/movie.dart';
+import 'package:ditonton/presentation/bloc/movie/now_playing_movies_bloc/now_playing_movies_bloc.dart';
+import 'package:ditonton/presentation/bloc/movie/popular_movies_bloc/popular_movies_bloc.dart';
+import 'package:ditonton/presentation/bloc/movie/top_rated_movies_bloc/top_rated_movies_bloc.dart';
 import 'package:ditonton/presentation/pages/movie/movie_detail_page.dart';
 import 'package:ditonton/presentation/pages/movie/popular_movies_page.dart';
 import 'package:ditonton/presentation/pages/movie/top_rated_movies_page.dart';
-import 'package:ditonton/presentation/provider/movie/movie_list_notifier.dart';
 import 'package:ditonton/presentation/widgets/sub_heading.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeMoviePage extends StatelessWidget {
   const HomeMoviePage({super.key});
@@ -24,52 +26,61 @@ class HomeMoviePage extends StatelessWidget {
               'Now Playing',
               style: kHeading6,
             ),
-            Consumer<MovieListNotifier>(builder: (context, data, child) {
-              final state = data.nowPlayingState;
-              if (state == RequestState.Loading) {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else if (state == RequestState.Loaded) {
-                return MovieList(data.nowPlayingMovies);
-              } else {
-                return Text('Failed');
-              }
-            }),
+            BlocBuilder<NowPlayingMoviesBloc, NowPlayingMoviesState>(
+              builder: (context, state) {
+                if (state is GetNowPlayingMoviesLoading) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (state is GetNowPlayingMoviesHasData) {
+                  return MovieList(state.result);
+                } else if (state is GetNowPlayingMoviesEmpty) {
+                  return Text("Empty data.");
+                } else {
+                  return Text("Failed to load data");
+                }
+              },
+            ),
             SubHeading(
               title: 'Popular',
               onTap: () =>
                   Navigator.pushNamed(context, PopularMoviesPage.ROUTE_NAME),
             ),
-            Consumer<MovieListNotifier>(builder: (context, data, child) {
-              final state = data.popularMoviesState;
-              if (state == RequestState.Loading) {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else if (state == RequestState.Loaded) {
-                return MovieList(data.popularMovies);
-              } else {
-                return Text('Failed');
-              }
-            }),
+            BlocBuilder<PopularMoviesBloc, PopularMoviesState>(
+              builder: (context, state) {
+                if (state is GetPopularMoviesLoading) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (state is GetPopularMoviesHasData) {
+                  return MovieList(state.result);
+                } else if (state is GetPopularMoviesEmpty) {
+                  return Text("Empty data.");
+                } else {
+                  return Text("Failed to load data");
+                }
+              },
+            ),
             SubHeading(
               title: 'Top Rated',
               onTap: () =>
                   Navigator.pushNamed(context, TopRatedMoviesPage.ROUTE_NAME),
             ),
-            Consumer<MovieListNotifier>(builder: (context, data, child) {
-              final state = data.topRatedMoviesState;
-              if (state == RequestState.Loading) {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else if (state == RequestState.Loaded) {
-                return MovieList(data.topRatedMovies);
-              } else {
-                return Text('Failed');
-              }
-            }),
+            BlocBuilder<TopRatedMoviesBloc, TopRatedMoviesState>(
+              builder: (context, state) {
+                if (state is GetTopRatedMoviesLoading) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (state is GetTopRatedMoviesHasData) {
+                  return MovieList(state.result);
+                } else if (state is GetTopRatedMoviesEmpty) {
+                  return Text("Empty data.");
+                } else {
+                  return Text("Failed to load data");
+                }
+              },
+            ),
           ],
         ),
       ),

@@ -2,23 +2,23 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:core/core.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ditonton/domain/entities/movie/movie.dart';
-import 'package:ditonton/presentation/bloc/movie/movie_search_bloc/movie_search_bloc.dart';
+import 'package:ditonton/presentation/bloc/movie/now_playing_movies_bloc/now_playing_movies_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../provider/movies/movie_search_notifier_test.mocks.dart';
+import '../../helpers/test_helper.mocks.dart';
 
 void main() {
-  late MovieSearchBloc moviesearchBloc;
-  late MockSearchMovies mockSearchMovies;
+  late NowPlayingMoviesBloc nowPlayingMoviesBloc;
+  late MockGetNowPlayingMovies mockGetNowPlayingMovies;
 
   setUp(() {
-    mockSearchMovies = MockSearchMovies();
-    moviesearchBloc = MovieSearchBloc(mockSearchMovies);
+    mockGetNowPlayingMovies = MockGetNowPlayingMovies();
+    nowPlayingMoviesBloc = NowPlayingMoviesBloc(mockGetNowPlayingMovies);
   });
 
-  test('initial state should be empty', () {
-    expect(moviesearchBloc.state, SearchEmpty());
+  test('initial GetNowPlaying state should be empty', () {
+    expect(nowPlayingMoviesBloc.state, GetNowPlayingMoviesEmpty());
   });
 
   final tMovieModel = Movie(
@@ -38,38 +38,40 @@ void main() {
     voteCount: 13507,
   );
   final tMovieList = <Movie>[tMovieModel];
-  final tQuery = 'spiderman';
 
-  blocTest<MovieSearchBloc, MovieSearchState>(
+  blocTest<NowPlayingMoviesBloc, NowPlayingMoviesState>(
     'Should emit [Loading, HasData] when data is gotten successfully',
     build: () {
-      when(mockSearchMovies.execute(tQuery))
+      when(mockGetNowPlayingMovies.execute())
           .thenAnswer((_) async => Right(tMovieList));
-      return moviesearchBloc;
+      return nowPlayingMoviesBloc;
     },
-    act: (bloc) => bloc.add(OnQueryChanged(tQuery)),
+    act: (bloc) => bloc.add(OnGetNowPlayingMovies()),
     wait: const Duration(milliseconds: 500),
     expect: () => [
-      SearchLoading(),
-      SearchHasData(tMovieList),
+      GetNowPlayingMoviesLoading(),
+      GetNowPlayingMoviesHasData(tMovieList),
     ],
     verify: (bloc) {
-      verify(mockSearchMovies.execute(tQuery));
+      verify(mockGetNowPlayingMovies.execute());
     },
   );
 
-  blocTest<MovieSearchBloc, MovieSearchState>(
-    'Should emit [Loading, Error] when get search is unsuccessful',
+  blocTest<NowPlayingMoviesBloc, NowPlayingMoviesState>(
+    'Should emit [Loading, Error] when get now playing movies is unsuccessful',
     build: () {
-      when(mockSearchMovies.execute(tQuery))
+      when(mockGetNowPlayingMovies.execute())
           .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
-      return moviesearchBloc;
+      return nowPlayingMoviesBloc;
     },
-    act: (bloc) => bloc.add(OnQueryChanged(tQuery)),
+    act: (bloc) => bloc.add(OnGetNowPlayingMovies()),
     wait: const Duration(milliseconds: 500),
-    expect: () => [SearchLoading(), SearchError('Server Failure')],
+    expect: () => [
+      GetNowPlayingMoviesLoading(),
+      GetNowPlayingMoviesError('Server Failure'),
+    ],
     verify: (bloc) {
-      verify(mockSearchMovies.execute(tQuery));
+      verify(mockGetNowPlayingMovies.execute());
     },
   );
 }
