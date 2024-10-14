@@ -2,23 +2,23 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:core/core.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ditonton/domain/entities/movie/movie.dart';
-import 'package:ditonton/presentation/bloc/movie/popular_movies_bloc/popular_movies_bloc.dart';
+import 'package:ditonton/presentation/bloc/movie/top_rated_movies_bloc/top_rated_movies_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../helpers/test_helper.mocks.dart';
+import '../../../helpers/test_helper.mocks.dart';
 
 void main() {
-  late PopularMoviesBloc popularMoviesBloc;
-  late MockGetPopularMovies mockGetPopularMovies;
+  late TopRatedMoviesBloc topRatedMoviesBloc;
+  late MockGetTopRatedMovies mockGetTopRatedMovies;
 
   setUp(() {
-    mockGetPopularMovies = MockGetPopularMovies();
-    popularMoviesBloc = PopularMoviesBloc(mockGetPopularMovies);
+    mockGetTopRatedMovies = MockGetTopRatedMovies();
+    topRatedMoviesBloc = TopRatedMoviesBloc(mockGetTopRatedMovies);
   });
 
   test('initial GetTopRated state should be empty', () {
-    expect(popularMoviesBloc.state, GetPopularMoviesEmpty());
+    expect(topRatedMoviesBloc.state, GetTopRatedMoviesEmpty());
   });
 
   final tMovieModel = Movie(
@@ -39,39 +39,39 @@ void main() {
   );
   final tMovieList = <Movie>[tMovieModel];
 
-  blocTest<PopularMoviesBloc, PopularMoviesState>(
+  blocTest<TopRatedMoviesBloc, TopRatedMoviesState>(
     'Should emit [Loading, HasData] when data is gotten successfully',
     build: () {
-      when(mockGetPopularMovies.execute())
+      when(mockGetTopRatedMovies.execute())
           .thenAnswer((_) async => Right(tMovieList));
-      return popularMoviesBloc;
+      return topRatedMoviesBloc;
     },
-    act: (bloc) => bloc.add(OnGetPopularMovies()),
+    act: (bloc) => bloc.add(OnGetTopRatedMovies()),
     wait: const Duration(milliseconds: 500),
     expect: () => [
-      GetPopularMoviesLoading(),
-      GetPopularMoviesHasData(tMovieList),
+      GetTopRatedMoviesLoading(),
+      GetTopRatedMoviesHasData(tMovieList),
     ],
     verify: (bloc) {
-      verify(mockGetPopularMovies.execute());
+      verify(mockGetTopRatedMovies.execute());
     },
   );
 
-  blocTest<PopularMoviesBloc, PopularMoviesState>(
+  blocTest<TopRatedMoviesBloc, TopRatedMoviesState>(
     'Should emit [Loading, Error] when get top rated movies is unsuccessful',
     build: () {
-      when(mockGetPopularMovies.execute())
+      when(mockGetTopRatedMovies.execute())
           .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
-      return popularMoviesBloc;
+      return topRatedMoviesBloc;
     },
-    act: (bloc) => bloc.add(OnGetPopularMovies()),
+    act: (bloc) => bloc.add(OnGetTopRatedMovies()),
     wait: const Duration(milliseconds: 500),
     expect: () => [
-      GetPopularMoviesLoading(),
-      GetPopularMoviesError('Server Failure'),
+      GetTopRatedMoviesLoading(),
+      GetTopRatedMoviesError('Server Failure'),
     ],
     verify: (bloc) {
-      verify(mockGetPopularMovies.execute());
+      verify(mockGetTopRatedMovies.execute());
     },
   );
 }

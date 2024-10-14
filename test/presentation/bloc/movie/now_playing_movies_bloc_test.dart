@@ -6,7 +6,7 @@ import 'package:ditonton/presentation/bloc/movie/now_playing_movies_bloc/now_pla
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../helpers/test_helper.mocks.dart';
+import '../../../helpers/test_helper.mocks.dart';
 
 void main() {
   late NowPlayingMoviesBloc nowPlayingMoviesBloc;

@@ -7,7 +7,7 @@ import 'package:ditonton/presentation/bloc/movie/movie_detail/movie_detail_bloc.
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../provider/movies/movie_detail_notifier_test.mocks.dart';
+import '../../provider/movies/movie_detail_notifier_test.mocks.dart';
 
 void main() {
   late MovieDetailBloc movieDetailBloc;

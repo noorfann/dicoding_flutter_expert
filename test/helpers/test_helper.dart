@@ -9,6 +9,10 @@ import 'package:ditonton/domain/usecases/movies/get_now_playing_movies.dart';
 import 'package:ditonton/domain/usecases/movies/get_popular_movies.dart';
 import 'package:ditonton/domain/usecases/movies/get_top_rated_movies.dart';
 import 'package:ditonton/domain/usecases/movies/search_movies.dart';
+import 'package:ditonton/domain/usecases/tv_series/get_now_playing_tv_series.dart';
+import 'package:ditonton/domain/usecases/tv_series/get_popular_tv_series.dart';
+import 'package:ditonton/domain/usecases/tv_series/get_top_rated_tv_series.dart';
+import 'package:ditonton/domain/usecases/tv_series/search_tv_series.dart';
 import 'package:mockito/annotations.dart';
 import 'package:http/http.dart' as http;
 
@@ -23,7 +27,11 @@ import 'package:http/http.dart' as http;
   GetNowPlayingMovies,
   GetPopularMovies,
   GetTopRatedMovies,
-  SearchMovies
+  SearchMovies,
+  GetAiringTodayTVSeries,
+  GetPopularTVSeries,
+  GetTopRatedTVSeries,
+  SearchTVSeries
 ], customMocks: [
   MockSpec<http.Client>(as: #MockHttpClient)
 ])

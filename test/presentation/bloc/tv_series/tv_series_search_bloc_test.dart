@@ -1,75 +1,76 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:core/core.dart';
 import 'package:dartz/dartz.dart';
-import 'package:ditonton/domain/entities/movie/movie.dart';
-import 'package:ditonton/presentation/bloc/movie/movie_search_bloc/movie_search_bloc.dart';
+import 'package:ditonton/domain/entities/tv_series/tv_series.dart';
+import 'package:ditonton/presentation/bloc/tv_series/tv_series_search_bloc/tv_series_search_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../provider/movies/movie_search_notifier_test.mocks.dart';
+import '../../provider/tv_series/tv_series_search_notifier_test.mocks.dart';
 
 void main() {
-  late MovieSearchBloc moviesearchBloc;
-  late MockSearchMovies mockSearchMovies;
+  late TVSeriesSearchBloc tvSeriessearchBloc;
+  late MockSearchTVSeries mockSearchTVSeries;
 
   setUp(() {
-    mockSearchMovies = MockSearchMovies();
-    moviesearchBloc = MovieSearchBloc(mockSearchMovies);
+    mockSearchTVSeries = MockSearchTVSeries();
+    tvSeriessearchBloc = TVSeriesSearchBloc(mockSearchTVSeries);
   });
 
   test('initial state should be empty', () {
-    expect(moviesearchBloc.state, SearchEmpty());
+    expect(tvSeriessearchBloc.state, SearchEmpty());
   });
 
-  final tMovieModel = Movie(
+  final tTVSeriesModel = TVSeries(
     adult: false,
     backdropPath: '/muth4OYamXf41G2evdrLEg8d3om.jpg',
     genreIds: [14, 28],
     id: 557,
-    originalTitle: 'Spider-Man',
+    originalName: 'Spider-Man',
+    originCountry: [],
+    originalLanguage: 'en',
+    firstAirDate: 'firstAirDate',
+    name: 'name',
     overview:
         'After being bitten by a genetically altered spider, nerdy high school student Peter Parker is endowed with amazing powers to become the Amazing superhero known as Spider-Man.',
     popularity: 60.441,
     posterPath: '/rweIrveL43TaxUN0akQEaAXL6x0.jpg',
-    releaseDate: '2002-05-01',
-    title: 'Spider-Man',
-    video: false,
     voteAverage: 7.2,
     voteCount: 13507,
   );
-  final tMovieList = <Movie>[tMovieModel];
+  final tTVSeriesList = <TVSeries>[tTVSeriesModel];
   final tQuery = 'spiderman';
 
-  blocTest<MovieSearchBloc, MovieSearchState>(
+  blocTest<TVSeriesSearchBloc, TVSeriesSearchState>(
     'Should emit [Loading, HasData] when data is gotten successfully',
     build: () {
-      when(mockSearchMovies.execute(tQuery))
-          .thenAnswer((_) async => Right(tMovieList));
-      return moviesearchBloc;
+      when(mockSearchTVSeries.execute(tQuery))
+          .thenAnswer((_) async => Right(tTVSeriesList));
+      return tvSeriessearchBloc;
     },
     act: (bloc) => bloc.add(OnQueryChanged(tQuery)),
     wait: const Duration(milliseconds: 500),
     expect: () => [
       SearchLoading(),
-      SearchHasData(tMovieList),
+      SearchHasData(tTVSeriesList),
     ],
     verify: (bloc) {
-      verify(mockSearchMovies.execute(tQuery));
+      verify(mockSearchTVSeries.execute(tQuery));
     },
   );
 
-  blocTest<MovieSearchBloc, MovieSearchState>(
+  blocTest<TVSeriesSearchBloc, TVSeriesSearchState>(
     'Should emit [Loading, Error] when get search is unsuccessful',
     build: () {
-      when(mockSearchMovies.execute(tQuery))
+      when(mockSearchTVSeries.execute(tQuery))
           .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
-      return moviesearchBloc;
+      return tvSeriessearchBloc;
     },
     act: (bloc) => bloc.add(OnQueryChanged(tQuery)),
     wait: const Duration(milliseconds: 500),
     expect: () => [SearchLoading(), SearchError('Server Failure')],
     verify: (bloc) {
-      verify(mockSearchMovies.execute(tQuery));
+      verify(mockSearchTVSeries.execute(tQuery));
     },
   );
 }
