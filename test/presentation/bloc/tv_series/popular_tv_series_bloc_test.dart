@@ -6,7 +6,7 @@ import 'package:ditonton/presentation/bloc/tv_series/popular_tv_series_bloc/popu
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../provider/tv_series/tv_series_list_notifier_test.mocks.dart';
+import '../../../helpers/test_helper.mocks.dart';
 
 void main() {
   late PopularTVSeriesBloc popularTVSeriesBloc;

@@ -7,7 +7,13 @@ sealed class WatchlistState extends Equatable {
   List<Object> get props => [];
 }
 
-final class GetWatchlistEmpty extends WatchlistState {}
+final class GetWatchlistEmpty extends WatchlistState {
+  final String message;
+  GetWatchlistEmpty(this.message);
+
+  @override
+  List<Object> get props => [message];
+}
 
 final class GetWatchlistLoading extends WatchlistState {}
 

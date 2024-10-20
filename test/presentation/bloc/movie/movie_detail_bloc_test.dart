@@ -3,11 +3,11 @@ import 'package:core/core.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ditonton/domain/entities/genre.dart';
 import 'package:ditonton/domain/entities/movie/movie_detail.dart';
-import 'package:ditonton/presentation/bloc/movie/movie_detail/movie_detail_bloc.dart';
+import 'package:ditonton/presentation/bloc/movie/movie_detail_bloc/movie_detail_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../provider/movies/movie_detail_notifier_test.mocks.dart';
+import '../../../helpers/test_helper.mocks.dart';
 
 void main() {
   late MovieDetailBloc movieDetailBloc;

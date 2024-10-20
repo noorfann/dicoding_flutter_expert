@@ -3,13 +3,14 @@ import 'package:ditonton/common/watch_category_enum.dart';
 import 'package:ditonton/presentation/bloc/movie/now_playing_movies_bloc/now_playing_movies_bloc.dart';
 import 'package:ditonton/presentation/bloc/movie/popular_movies_bloc/popular_movies_bloc.dart';
 import 'package:ditonton/presentation/bloc/movie/top_rated_movies_bloc/top_rated_movies_bloc.dart';
+import 'package:ditonton/presentation/bloc/tv_series/now_playing_tv_series_bloc/now_playing_tv_series_bloc.dart';
+import 'package:ditonton/presentation/bloc/tv_series/popular_tv_series_bloc/popular_tv_series_bloc.dart';
+import 'package:ditonton/presentation/bloc/tv_series/top_rated_tv_series_bloc/top_rated_tv_series_bloc.dart';
 import 'package:ditonton/presentation/pages/movie/home_movie_page.dart';
 import 'package:ditonton/presentation/pages/movie/search_movie_page.dart';
 import 'package:ditonton/presentation/pages/tv_series/home_tv_series_page.dart';
 import 'package:ditonton/presentation/pages/tv_series/search_tv_series_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_page.dart';
-import 'package:ditonton/presentation/provider/movie/movie_list_notifier.dart';
-import 'package:ditonton/presentation/provider/tv_series/tv_series_list_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -39,10 +40,9 @@ class _HomePageState extends State<HomePage> {
         context.read<TopRatedMoviesBloc>().add(OnGetTopRatedMovies());
         break;
       case WatchCategory.tvSeries:
-        Provider.of<TVSeriesListNotifier>(context, listen: false)
-          ..fetchAiringTodayTVSeries()
-          ..fetchPopularTVSeries()
-          ..fetchTopRatedTVSeries();
+        context.read<NowPlayingTVSeriesBloc>().add(OnGetNowPlayingTVSeries());
+        context.read<PopularTVSeriesBloc>().add(OnGetPopularTVSeries());
+        context.read<TopRatedTVSeriesBloc>().add(OnGetTopRatedTVSeries());
         break;
     }
   }

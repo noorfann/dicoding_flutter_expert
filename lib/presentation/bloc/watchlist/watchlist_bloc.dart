@@ -12,7 +12,7 @@ class WatchlistBloc extends Bloc<WatchlistEvent, WatchlistState> {
   final GetWatchlistMovies _getWatchlistMovies;
   final GetWatchlistTvSeries _getWatchlistTvSeries;
   WatchlistBloc(this._getWatchlistMovies, this._getWatchlistTvSeries)
-      : super(GetWatchlistEmpty()) {
+      : super(GetWatchlistEmpty('Empty watchlist')) {
     on<OnGetWatchlistMovie>((event, emit) async {
       emit(GetWatchlistLoading());
       final result = await _getWatchlistMovies.execute();

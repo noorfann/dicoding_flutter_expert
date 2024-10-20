@@ -1,17 +1,17 @@
-part of 'movie_watchlist_bloc.dart';
+part of 'tv_series_watchlist_bloc.dart';
 
-sealed class MovieWatchlistState extends Equatable {
-  const MovieWatchlistState();
+sealed class TvWatchlistState extends Equatable {
+  const TvWatchlistState();
 
   @override
   List<Object> get props => [];
 }
 
-final class MovieWatchlistInitial extends MovieWatchlistState {}
+final class TvWatchlistInitial extends TvWatchlistState {}
 
-final class WatchlistStatusLoading extends MovieWatchlistState {}
+final class WatchlistStatusLoading extends TvWatchlistState {}
 
-final class WatchlistStatusError extends MovieWatchlistState {
+final class WatchlistStatusError extends TvWatchlistState {
   final String message;
 
   WatchlistStatusError(this.message);
@@ -20,7 +20,7 @@ final class WatchlistStatusError extends MovieWatchlistState {
   List<Object> get props => [message];
 }
 
-final class WatchlistStatusLoaded extends MovieWatchlistState {
+final class WatchlistStatusLoaded extends TvWatchlistState {
   final bool isAddedToWatchlist;
 
   WatchlistStatusLoaded(this.isAddedToWatchlist);
@@ -29,9 +29,9 @@ final class WatchlistStatusLoaded extends MovieWatchlistState {
   List<Object> get props => [isAddedToWatchlist];
 }
 
-final class SaveWatchlistLoading extends MovieWatchlistState {}
+final class SaveWatchlistLoading extends TvWatchlistState {}
 
-final class SaveWatchlistError extends MovieWatchlistState {
+final class SaveWatchlistError extends TvWatchlistState {
   final String message;
 
   SaveWatchlistError(this.message);
@@ -40,7 +40,7 @@ final class SaveWatchlistError extends MovieWatchlistState {
   List<Object> get props => [message];
 }
 
-final class SaveWatchlistSuccess extends MovieWatchlistState {
+final class SaveWatchlistSuccess extends TvWatchlistState {
   final String message;
 
   SaveWatchlistSuccess(this.message);
@@ -49,9 +49,9 @@ final class SaveWatchlistSuccess extends MovieWatchlistState {
   List<Object> get props => [message];
 }
 
-final class RemoveWatchlistLoading extends MovieWatchlistState {}
+final class RemoveWatchlistLoading extends TvWatchlistState {}
 
-final class RemoveWatchlistError extends MovieWatchlistState {
+final class RemoveWatchlistError extends TvWatchlistState {
   final String message;
 
   RemoveWatchlistError(this.message);
@@ -60,7 +60,7 @@ final class RemoveWatchlistError extends MovieWatchlistState {
   List<Object> get props => [message];
 }
 
-final class RemoveWatchlistSuccess extends MovieWatchlistState {
+final class RemoveWatchlistSuccess extends TvWatchlistState {
   final String message;
 
   RemoveWatchlistSuccess(this.message);

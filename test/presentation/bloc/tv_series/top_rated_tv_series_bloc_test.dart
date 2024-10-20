@@ -5,7 +5,7 @@ import 'package:ditonton/domain/entities/tv_series/tv_series.dart';
 import 'package:ditonton/presentation/bloc/tv_series/top_rated_tv_series_bloc/top_rated_tv_series_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import '../../provider/tv_series/top_rated_tv_series_notifier_test.mocks.dart';
+import '../../../helpers/test_helper.mocks.dart';
 
 void main() {
   late TopRatedTVSeriesBloc topRatedTVSeriesBloc;

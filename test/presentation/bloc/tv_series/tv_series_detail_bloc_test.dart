@@ -3,12 +3,11 @@ import 'package:core/core.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ditonton/domain/entities/genre.dart';
 import 'package:ditonton/domain/entities/tv_series/tv_series_detail.dart';
-import 'package:ditonton/presentation/bloc/movie/movie_detail/movie_detail_bloc.dart';
 import 'package:ditonton/presentation/bloc/tv_series/tv_series_detail/tv_series_detail_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../provider/tv_series/tv_series_detail_notifier_test.mocks.dart';
+import '../../../helpers/test_helper.mocks.dart';
 
 void main() {
   late TVSeriesDetailBloc tvSeriesDetailBloc;
@@ -20,7 +19,7 @@ void main() {
   });
 
   test('initial state should be empty', () {
-    expect(tvSeriesDetailBloc.state, MovieDetailEmpty());
+    expect(tvSeriesDetailBloc.state, TVSeriesDetailEmpty());
   });
 
   final tId = 1;

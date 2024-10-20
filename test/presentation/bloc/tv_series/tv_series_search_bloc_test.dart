@@ -6,7 +6,7 @@ import 'package:ditonton/presentation/bloc/tv_series/tv_series_search_bloc/tv_se
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../provider/tv_series/tv_series_search_notifier_test.mocks.dart';
+import '../../../helpers/test_helper.mocks.dart';
 
 void main() {
   late TVSeriesSearchBloc tvSeriessearchBloc;

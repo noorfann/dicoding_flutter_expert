@@ -9,10 +9,11 @@ sealed class MovieWatchlistEvent extends Equatable {
 
 class OnGetWatchlistStatus extends MovieWatchlistEvent {
   final int id;
-  OnGetWatchlistStatus(this.id);
+  final WatchCategory category;
+  OnGetWatchlistStatus(this.id, this.category);
 
   @override
-  List<Object> get props => [this.id];
+  List<Object> get props => [this.id, this.category];
 }
 
 class OnSaveWatchlist extends MovieWatchlistEvent {
@@ -26,8 +27,10 @@ class OnSaveWatchlist extends MovieWatchlistEvent {
 
 class OnRemoveWatchlist extends MovieWatchlistEvent {
   final int id;
-  OnRemoveWatchlist(this.id);
+
+  final WatchCategory category;
+  OnRemoveWatchlist(this.id, this.category);
 
   @override
-  List<Object> get props => [this.id];
+  List<Object> get props => [this.id, this.category];
 }

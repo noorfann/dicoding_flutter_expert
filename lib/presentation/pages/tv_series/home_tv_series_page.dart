@@ -1,14 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/core.dart';
 import 'package:ditonton/domain/entities/tv_series/tv_series.dart';
+import 'package:ditonton/presentation/bloc/tv_series/now_playing_tv_series_bloc/now_playing_tv_series_bloc.dart';
+import 'package:ditonton/presentation/bloc/tv_series/popular_tv_series_bloc/popular_tv_series_bloc.dart';
+import 'package:ditonton/presentation/bloc/tv_series/top_rated_tv_series_bloc/top_rated_tv_series_bloc.dart';
 import 'package:ditonton/presentation/pages/tv_series/airing_today_tv_series_page.dart';
 import 'package:ditonton/presentation/pages/tv_series/popular_tv_series_page.dart';
 import 'package:ditonton/presentation/pages/tv_series/top_rated_tv_series_page.dart';
 import 'package:ditonton/presentation/pages/tv_series/tv_series_detail_page.dart';
-import 'package:ditonton/presentation/provider/tv_series/tv_series_list_notifier.dart';
 import 'package:ditonton/presentation/widgets/sub_heading.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeTvSeriesPage extends StatelessWidget {
   const HomeTvSeriesPage({super.key});
@@ -26,14 +28,14 @@ class HomeTvSeriesPage extends StatelessWidget {
               onTap: () => Navigator.pushNamed(
                   context, AiringTodayTvSeriesPage.ROUTE_NAME),
             ),
-            Consumer<TVSeriesListNotifier>(builder: (context, data, child) {
-              final state = data.nowPlayingState;
-              if (state == RequestState.Loading) {
+            BlocBuilder<NowPlayingTVSeriesBloc, NowPlayingTVSeriesState>(
+                builder: (context, state) {
+              if (state is GetNowPlayingTVSeriesLoading) {
                 return Center(
                   child: CircularProgressIndicator(),
                 );
-              } else if (state == RequestState.Loaded) {
-                return TVSeriesList(data.nowPlayingTVSeries);
+              } else if (state is GetNowPlayingTVSeriesHasData) {
+                return TVSeriesList(state.result);
               } else {
                 return Text('Failed');
               }
@@ -43,14 +45,14 @@ class HomeTvSeriesPage extends StatelessWidget {
               onTap: () =>
                   Navigator.pushNamed(context, PopularTvSeriesPage.ROUTE_NAME),
             ),
-            Consumer<TVSeriesListNotifier>(builder: (context, data, child) {
-              final state = data.popularTVSeriesState;
-              if (state == RequestState.Loading) {
+            BlocBuilder<PopularTVSeriesBloc, PopularTVSeriesState>(
+                builder: (context, state) {
+              if (state is GetPopularTVSeriesLoading) {
                 return Center(
                   child: CircularProgressIndicator(),
                 );
-              } else if (state == RequestState.Loaded) {
-                return TVSeriesList(data.popularTVSeries);
+              } else if (state is GetPopularTVSeriesHasData) {
+                return TVSeriesList(state.result);
               } else {
                 return Text('Failed');
               }
@@ -60,14 +62,14 @@ class HomeTvSeriesPage extends StatelessWidget {
               onTap: () =>
                   Navigator.pushNamed(context, TopRatedTvSeriesPage.ROUTE_NAME),
             ),
-            Consumer<TVSeriesListNotifier>(builder: (context, data, child) {
-              final state = data.topRatedTVSeriesState;
-              if (state == RequestState.Loading) {
+            BlocBuilder<TopRatedTVSeriesBloc, TopRatedTVSeriesState>(
+                builder: (context, state) {
+              if (state is GetTopRatedTVSeriesLoading) {
                 return Center(
                   child: CircularProgressIndicator(),
                 );
-              } else if (state == RequestState.Loaded) {
-                return TVSeriesList(data.topRatedTVSeries);
+              } else if (state is GetTopRatedTVSeriesHasData) {
+                return TVSeriesList(state.result);
               } else {
                 return Text('Failed');
               }

@@ -1,10 +1,8 @@
 import 'package:core/core.dart';
 import 'package:ditonton/presentation/bloc/movie/movie_search_bloc/movie_search_bloc.dart';
-import 'package:ditonton/presentation/provider/movie/movie_search_notifier.dart';
 import 'package:ditonton/presentation/widgets/movie_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 
 class SearchMoviePage extends StatelessWidget {
   static const ROUTE_NAME = '/search';
