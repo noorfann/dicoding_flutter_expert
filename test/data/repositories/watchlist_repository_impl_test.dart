@@ -1,6 +1,5 @@
+import 'package:core/core.dart';
 import 'package:dartz/dartz.dart';
-import '../../../core/lib/utils/exception.dart';
-import '../../../core/lib/utils/failure.dart';
 import 'package:ditonton/common/watch_category_enum.dart';
 import 'package:ditonton/data/repositories/watchlist_repository_impl.dart';
 import 'package:flutter_test/flutter_test.dart';

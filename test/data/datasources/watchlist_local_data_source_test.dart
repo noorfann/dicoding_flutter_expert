@@ -1,4 +1,4 @@
-import '../../../core/lib/utils/exception.dart';
+import 'package:core/core.dart';
 import 'package:ditonton/common/watch_category_enum.dart';
 import 'package:ditonton/data/datasources/watchlist_local_data_source.dart';
 import 'package:flutter_test/flutter_test.dart';

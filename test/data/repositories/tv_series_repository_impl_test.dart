@@ -1,9 +1,8 @@
 import 'dart:io';
 
+import 'package:core/core.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ditonton/data/models/genre_model.dart';
-import '../../../core/lib/utils/exception.dart';
-import '../../../core/lib/utils/failure.dart';
 import 'package:ditonton/data/models/tv_series/season_model.dart';
 import 'package:ditonton/data/models/tv_series/tv_series_detail_model.dart';
 import 'package:ditonton/data/models/tv_series/tv_series_model.dart';
