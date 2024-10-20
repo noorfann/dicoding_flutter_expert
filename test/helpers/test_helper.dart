@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:ditonton/data/datasources/db/database_helper.dart';
 import 'package:ditonton/data/datasources/movie/movie_remote_data_source.dart';
 import 'package:ditonton/data/datasources/tv_series/tv_series_remote_data_source.dart';
@@ -15,8 +17,8 @@ import 'package:ditonton/domain/usecases/tv_series/get_popular_tv_series.dart';
 import 'package:ditonton/domain/usecases/tv_series/get_top_rated_tv_series.dart';
 import 'package:ditonton/domain/usecases/tv_series/get_tv_series_detail.dart';
 import 'package:ditonton/domain/usecases/tv_series/search_tv_series.dart';
+import 'package:http/io_client.dart';
 import 'package:mockito/annotations.dart';
-import 'package:http/http.dart' as http;
 
 @GenerateMocks([
   MovieRepository,
@@ -37,6 +39,7 @@ import 'package:http/http.dart' as http;
   SearchTVSeries,
   GetTVSeriesDetail
 ], customMocks: [
-  MockSpec<http.Client>(as: #MockHttpClient)
+  MockSpec<HttpClient>(as: #MockHttpClient),
+  MockSpec<IOClient>(as: #MockIOClient)
 ])
 void main() {}

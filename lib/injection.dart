@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:core/utils/ssl_pinning_utils.dart';
 import 'package:ditonton/data/datasources/db/database_helper.dart';
 import 'package:ditonton/data/datasources/movie/movie_remote_data_source.dart';
 import 'package:ditonton/data/datasources/tv_series/tv_series_remote_data_source.dart';
@@ -40,14 +43,16 @@ import 'package:ditonton/presentation/bloc/tv_series/tv_series_detail/tv_series_
 import 'package:ditonton/presentation/bloc/tv_series/tv_series_recommendation_bloc/tv_series_recommendation_bloc.dart';
 import 'package:ditonton/presentation/bloc/tv_series/tv_series_search_bloc/tv_series_search_bloc.dart';
 import 'package:ditonton/presentation/bloc/watchlist/watchlist_bloc.dart';
-import 'package:http/http.dart' as http;
 import 'package:get_it/get_it.dart';
+import 'package:http/io_client.dart';
 
 import 'presentation/bloc/tv_series/tv_series_watchlist_bloc/tv_series_watchlist_bloc.dart';
 
 final locator = GetIt.instance;
 
-void init() {
+Future<void> init() async {
+  final sslContext = await SslPinningUtils.globalContext;
+
   //movie bloc
   locator.registerFactory(
     () => PopularMoviesBloc(
@@ -180,17 +185,18 @@ void init() {
     ),
   );
 
+  // external
+  locator
+      .registerLazySingleton(() => IOClient(HttpClient(context: sslContext)));
+
   // data sources
   locator.registerLazySingleton<MovieRemoteDataSource>(
-      () => MovieRemoteDataSourceImpl(client: locator()));
+      () => MovieRemoteDataSourceImpl(ioClient: locator()));
   locator.registerLazySingleton<TVSeriesRemoteDataSource>(
-      () => TVSeriesRemoteDataSourceImpl(client: locator()));
+      () => TVSeriesRemoteDataSourceImpl(ioClient: locator()));
   locator.registerLazySingleton<WatchlistLocalDataSource>(
       () => WatchlistLocalDataSourceImpl(databaseHelper: locator()));
 
   // helper
   locator.registerLazySingleton<DatabaseHelper>(() => DatabaseHelper());
-
-  // external
-  locator.registerLazySingleton(() => http.Client());
 }
