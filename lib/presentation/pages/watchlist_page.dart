@@ -1,10 +1,10 @@
-import 'package:ditonton/common/utils.dart';
-import 'package:ditonton/common/watch_category_enum.dart';
+import 'package:core/common/utils.dart';
+import 'package:core/common/watch_category_enum.dart';
 import 'package:ditonton/presentation/bloc/watchlist/watchlist_bloc.dart';
-import 'package:ditonton/presentation/widgets/movie_card_list.dart';
-import 'package:ditonton/presentation/widgets/tv_series_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie/presentation/widgets/movie_card_list.dart';
+import 'package:tv_series/presentation/pages/widgets/tv_series_card_list.dart';
 
 class WatchlistPage extends StatefulWidget {
   static const ROUTE_NAME = '/watchlist-movie';

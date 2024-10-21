@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
-import 'package:ditonton/domain/entities/movie/movie.dart';
-import 'package:ditonton/domain/entities/tv_series/tv_series.dart';
-import 'package:ditonton/domain/usecases/watchlist/get_watchlist_movies.dart';
-import 'package:ditonton/domain/usecases/watchlist/get_watchlist_tv_series.dart';
+import 'package:core/domain/entities/movie/movie.dart';
+import 'package:core/domain/entities/tv_series/tv_series.dart';
+import 'package:core/domain/usecases/watchlist/get_watchlist_movies.dart';
+import 'package:core/domain/usecases/watchlist/get_watchlist_tv_series.dart';
 import 'package:equatable/equatable.dart';
 
 part 'watchlist_event.dart';
