@@ -1,6 +1,8 @@
 import 'package:about/about.dart';
 import 'package:core/core.dart';
 import 'package:core/common/utils.dart';
+import 'package:ditonton/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:tv_series/presentation/bloc/now_playing_tv_series_bloc/now_playing_tv_series_bloc.dart';
 import 'package:tv_series/presentation/bloc/popular_tv_series_bloc/popular_tv_series_bloc.dart';
 import 'package:tv_series/presentation/bloc/top_rated_tv_series_bloc/top_rated_tv_series_bloc.dart';
@@ -35,6 +37,9 @@ import 'package:ditonton/injection.dart' as di;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await di.init();
   runApp(MyApp());
 }
