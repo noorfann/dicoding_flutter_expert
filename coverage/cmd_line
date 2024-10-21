@@ -1,0 +1,1 @@
+genhtml coverage/test.info -o coverage --no-function-coverage --prefix /Users/zulfikarnoorfan/Documents/Development/flutter/learn/dicoding_expert
