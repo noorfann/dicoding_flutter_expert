@@ -28,7 +28,7 @@ class TVSeriesModel extends Equatable {
   final String originalName;
   final String overview;
   final double popularity;
-  final String posterPath;
+  String? posterPath;
   final String firstAirDate;
   final String name;
   final double voteAverage;
